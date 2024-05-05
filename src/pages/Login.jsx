@@ -42,12 +42,13 @@ const Login = () => {
             />
           </div>
           <span className='flex w-full justify-center'><Link to={"/signup"} className='text-center mb-3 hover:text-sky-500 w-fit'>Sign Up</Link></span>
-          <button
+          <Link to={"/home"}><button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg w-full"
           >
             Login
           </button>
+          </Link>
         </form>
       </div>
     </div>
