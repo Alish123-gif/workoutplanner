@@ -58,7 +58,7 @@ const AppContent = () => {
       </div>
 
       {show && <SideBar />}
-      {show && <Logo className="absolute top-0 right-5 mt-5" />}
+      {/*{show && <Logo className="absolute top-0 right-5 mt-5" />} */}
       {show && <Footer className="absolute bottom-0 w-full" />}
     </div>
   );
