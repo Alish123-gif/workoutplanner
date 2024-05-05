@@ -7,8 +7,10 @@ import { isMobile } from 'react-device-detect';
 
 
 export default function SideBar() {
+    const underDevelopment = ["Contact Us", "Gym", "Under Development"]
     const { isOpen, setIsOpen, content, setContent, active, setActive, activeID, setActiveID } = useAppContext();
     const Navigate = useNavigate();
+
     const handleLinkClick = (content) => {
         setActive(true)
         if (isMobile) {
@@ -56,7 +58,7 @@ export default function SideBar() {
                             key={link}
                             className={`pl-12 py-4 text-5xl liquid-text${active && activeID === link ? " liquid-text-active" : ""} transition-effect text-stroke font-custom`}
                         >
-                            {link}
+                            {link} {underDevelopment.includes(link) && <span className='text-xs'>Under Development</span>}
                         </Link>
                     ))}
                     <hr className='m-2' />
