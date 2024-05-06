@@ -33,32 +33,38 @@ const AppContent = () => {
           <Route path="/underdevelopment" element={<Exercise exercise={exercises[0]}/>}/>
 
           <Route path="home/workouts/chest" element={<Workouts filters="chest" />} />
-          <Route path="home/workouts/upperabs" element={<Workouts filters="upperabs" />} />
-          <Route path="home/workouts/biceps" element={<Workouts filters="biceps" />} />
-          <Route path="home/workouts/triceps" element={<Workouts filters="triceps" />} />
+          <Route path="home/workouts/upperabs" element={<Workouts filters="core" />} />
+          <Route path="home/workouts/biceps" element={<Workouts filters="arms" />} />
+          <Route path="home/workouts/triceps" element={<Workouts filters="arms" />} />
           <Route path="home/workouts/forearms" element={<Workouts filters="forearms" />} />
-          <Route path="home/workouts/quads" element={<Workouts filters="quads" />} />
-          <Route path="home/workouts/hamstring" element={<Workouts filters="hamstring" />} />
+          <Route path="home/workouts/quads" element={<Workouts filters="legs" />} />
+          <Route path="home/workouts/hamstring" element={<Workouts filters="legs" />} />
           <Route path="home/workouts/calves" element={<Workouts filters="calves" />} />
-          <Route path="home/workouts/lowerabs" element={<Workouts filters="lowerabs" />} />
+          <Route path="home/workouts/lowerabs" element={<Workouts filters="core" />} />
           <Route path="home/workouts/shoulders" element={<Workouts filters="shoulders" />} />
           <Route path="home/workouts/traps" element={<Workouts filters="traps" />} />
           <Route path="workouts/chest" element={<Workouts filters="chest" />} />
-          <Route path="workouts/upperabs" element={<Workouts filters="upperabs" />} />
-          <Route path="workouts/biceps" element={<Workouts filters="biceps" />} />
-          <Route path="workouts/triceps" element={<Workouts filters="triceps" />} />
+          <Route path="workouts/upperabs" element={<Workouts filters="core" />} />
+          <Route path="workouts/biceps" element={<Workouts filters="arms" />} />
+          <Route path="workouts/triceps" element={<Workouts filters="arms" />} />
           <Route path="workouts/forearms" element={<Workouts filters="forearms" />} />
-          <Route path="workouts/quads" element={<Workouts filters="quads" />} />
-          <Route path="workouts/hamstring" element={<Workouts filters="hamstring" />} />
+          <Route path="workouts/quads" element={<Workouts filters="legs" />} />
+          <Route path="workouts/hamstring" element={<Workouts filters="legs" />} />
           <Route path="workouts/calves" element={<Workouts filters="calves" />} />
-          <Route path="workouts/lowerabs" element={<Workouts filters="lowerabs" />} />
+          <Route path="workouts/lowerabs" element={<Workouts filters="core" />} />
           <Route path="workouts/shoulders" element={<Workouts filters="shoulders" />} />
           <Route path="workouts/traps" element={<Workouts filters="traps" />} />
+          <Route path="workouts/upperback" element={<Workouts filters="back" />} />
+          <Route path="workouts/lowerback" element={<Workouts filters="back" />} />
+          <Route path="workouts/lats" element={<Workouts filters="back" />} />
+          <Route path="home/workouts/lats" element={<Workouts filters="back" />} />
+          <Route path="home/workouts/upperback" element={<Workouts filters="back" />} />
+          <Route path="home/workouts/lowerback" element={<Workouts filters="back" />} />
         </Routes>
       </div>
 
       {show && <SideBar />}
-      {/*{show && <Logo className="absolute top-0 right-5 mt-5" />} */}
+      {show && <Logo className="absolute top-0 right-5 mt-5" />}
       {show && <Footer className="absolute bottom-0 w-full" />}
     </div>
   );
