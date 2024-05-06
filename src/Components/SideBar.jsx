@@ -50,7 +50,7 @@ export default function SideBar() {
                 leaveTo="-translate-x-full"
                 className={`fixed inset-y-0 left-0 ${screenSize.width<720?"w-full": "w-5/12" } custom-background`}
             >
-                <div className="flex flex-col mt-5">
+                <div className="flex flex-col mt-5 scrollable">
                     {['Home', 'Your Plan', 'Contact Us', 'Gym', "Workouts", "Under Development"].map((link, index) => (
                         <Link
                             onClick={() => handleLinkClick(link)}
