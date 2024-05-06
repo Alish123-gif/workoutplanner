@@ -5,6 +5,7 @@ export { default as Card } from './Card'
 export { default as DraggableCard } from './DraggableCard'
 export { default as DroppableZone } from './DroppableZone'
 export {default as Footer} from'./Footer/Footer'
+export {default as Modal} from'./Modal'
 
 
 import { FaArrowUp } from "react-icons/fa";

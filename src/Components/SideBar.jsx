@@ -8,7 +8,7 @@ import { isMobile } from 'react-device-detect';
 
 export default function SideBar() {
     const underDevelopment = ["Contact Us", "Gym", "Under Development"]
-    const { isOpen, setIsOpen, content, setContent, active, setActive, activeID, setActiveID } = useAppContext();
+    const { isOpen, setIsOpen, content, setContent, active, setActive, activeID, setActiveID,screenSize } = useAppContext();
     const Navigate = useNavigate();
 
     const handleLinkClick = (content) => {
@@ -48,7 +48,7 @@ export default function SideBar() {
                 leave="transition ease-in duration-450"
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
-                className="fixed inset-y-0 left-0 lg:w-5/12 w-full custom-background"
+                className={`fixed inset-y-0 left-0 ${screenSize.width<720?"w-full": "w-5/12" } custom-background`}
             >
                 <div className="flex flex-col mt-5">
                     {['Home', 'Your Plan', 'Contact Us', 'Gym', "Workouts", "Under Development"].map((link, index) => (
@@ -79,7 +79,7 @@ export default function SideBar() {
 
             {/* Menu Icon */}
             <div
-                className={`z-50 fixed inset-y-0 flex p-1 pl-3 h-fit mt-3  ${isMobile ? 'left-0' : isOpen ? 'left-[85%] lg:left-[42%]' : 'left-0'}`}>
+                className={`z-50 fixed inset-y-0 flex p-1 pl-3 h-fit mt-3  ${screenSize.width<720 ? 'left-0' : isOpen ? 'left-[42%] ' : 'left-0'}`}>
                 <RiMenu2Line
                     style={{ height: "27px", width: "27px" }}
                     className="text-4xl text-white cursor-pointer"

@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react';
 import DraggableCard from './DraggableCard';
 import { useDrop } from 'react-dnd';
+import Modal from './Modal';
+
+
 export default function DroppableZone({ day, onDrop, exercises }) {
+
     const [{ isOver }, drop] = useDrop(() => ({
         accept: 'card',
         drop: (item) => onDrop(day, item.id),
@@ -20,6 +24,7 @@ export default function DroppableZone({ day, onDrop, exercises }) {
                     place={"day"}
                 />
             ))}
+
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext } from 'react';
+import React, { createContext, useReducer, useContext, useEffect } from 'react';
 
 
 // Initial state
@@ -7,6 +7,10 @@ const initialState = {
   content: null,
   active: false,
   activeID: null,
+  screenSize: {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  },
 };
 
 // Create context
@@ -23,6 +27,8 @@ function appReducer(state, action) {
       return { ...state, active: action.payload };
     case 'SET_ACTIVE_ID':
       return { ...state, activeID: action.payload };
+    case 'SET_SCREEN_SIZE':
+      return { ...state, screenSize: action.payload };
     default:
       return state;
   }
@@ -37,13 +43,26 @@ export const AppProvider = ({ children }) => {
   const setContent = content => dispatch({ type: 'SET_CONTENT', payload: content });
   const setActive = active => dispatch({ type: 'SET_ACTIVE', payload: active });
   const setActiveID = activeID => dispatch({ type: 'SET_ACTIVE_ID', payload: activeID });
-  const setIsMobile = isMobile => dispatch({ type: 'SET_IS_MOBILE', payload: isMobile });
+  const setScreenSize = screenSize => dispatch({ type: 'SET_SCREEN_SIZE', payload: screenSize });
 
 
   const toggleSidebar = () => {
     setIsOpen();
   };
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
 
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [setScreenSize]);
   // Value provided to context consumers
   const value = {
     ...state,
@@ -51,7 +70,7 @@ export const AppProvider = ({ children }) => {
     setContent,
     setActive,
     setActiveID,
-    setIsMobile,
+    setScreenSize,
     toggleSidebar,
   };
 
