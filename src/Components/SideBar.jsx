@@ -30,7 +30,7 @@ export default function SideBar() {
                 Navigate('/' + content.toLowerCase().split(" ").join(""));
             }, isMobile ? 2000 : 1000);
             setActive(false);
-        }, isMobile ? 2000 : 1000);
+        }, isMobile ? 2500 : 1000);
     };
 
     const toggleSidebar = () => {
