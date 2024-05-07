@@ -28,7 +28,7 @@ export default function SideBar() {
             setTimeout(() => {
                 setContent(null);
                 Navigate('/' + content.toLowerCase().split(" ").join(""));
-            }, isMobile ? 1000 : 1000);
+            }, isMobile ? 2500 : 1000);
             setActive(false);
         }, isMobile ? 1500 : 1000);
     };
