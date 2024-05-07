@@ -28,9 +28,9 @@ export default function SideBar() {
             setTimeout(() => {
                 setContent(null);
                 Navigate('/' + content.toLowerCase().split(" ").join(""));
-            }, isMobile ? 3000 : 1000);
+            }, isMobile ? 2000 : 1000);
             setActive(false);
-        }, isMobile ? 3000 : 1000);
+        }, isMobile ? 2000 : 1000);
     };
 
     const toggleSidebar = () => {
