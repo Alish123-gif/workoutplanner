@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-export default function Card({ exerciseName, muscleName, difficulty,place }) {
-    const [sets, setSets] = useState(3);
-    const [reps, setReps] = useState(10);
+export default function Card({ exerciseName, muscleName, difficulty, place, sets, reps, updateSets, updateReps }) {
+
 
     const buttonStyle = {
         width: '15px',
@@ -25,16 +24,16 @@ export default function Card({ exerciseName, muscleName, difficulty,place }) {
                 <p className={`${difficulty === "beginner" ? "bg-green-400/60" : difficulty === "intermediate" ? "bg-yellow-400/60" : difficulty === "advanced" ? "bg-red-400/60" : ""} py-0.5 px-1 rounded-lg w-fit text-xs m-0 mt-1 self-center`}>{difficulty}</p>
             </div>
 
-            {place ==="day"&&<div className='flex gap-4 justify-between py-2 text-gray-500'>
+            {place === "day" && <div className='flex gap-4 justify-between py-2 text-gray-500'>
                 <div>
-                    <button style={buttonStyle} onClick={() => setSets(sets - 1)}>-</button>
+                    <button style={buttonStyle} onClick={() => updateSets(sets - 1)}>-</button>
                     <span className='mx-2'>{sets} sets</span>
-                    <button style={buttonStyle} onClick={() => setSets(sets + 1)}>+</button>
+                    <button style={buttonStyle} onClick={() => updateSets(sets + 1)}>+</button>
                 </div>
                 <div>
-                    <button style={buttonStyle} onClick={() => setReps(reps - 1)}>-</button>
+                    <button style={buttonStyle} onClick={() => updateReps(reps - 1)}>-</button>
                     <span className='mx-2'>{reps} reps</span>
-                    <button style={buttonStyle} onClick={() => setReps(reps + 1)}>+</button>
+                    <button style={buttonStyle} onClick={() => updateReps(reps + 1)}>+</button>
                 </div>
             </div>}
         </div>

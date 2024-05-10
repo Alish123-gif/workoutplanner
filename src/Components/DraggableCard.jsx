@@ -2,7 +2,7 @@ import React from "react";
 import Card from "./Card";
 import { useDrag } from 'react-dnd';
 
-export default function DraggableCard({ exercise, place, onEndDrag, onClick }) {
+export default function DraggableCard({ exercise, place, onEndDrag, onClick, updateSets, updateReps }) {
     const [{ isDragging }, drag] = useDrag(() => ({
         type: 'card',
         item: { id: exercise.id },
@@ -24,9 +24,11 @@ export default function DraggableCard({ exercise, place, onEndDrag, onClick }) {
                 muscleName={exercise.muscle}
                 difficultyColor={exercise.difficultyColor}
                 difficulty={exercise.difficulty}
-                sets={3}
-                reps={10}
+                sets={exercise.sets}
+                reps={exercise.reps}
                 place={place}
+                updateSets={(newSets) => updateSets(exercise.id, newSets)}
+                updateReps={(newReps) => updateReps(exercise.id, newReps)}
             />
         </div>
     );

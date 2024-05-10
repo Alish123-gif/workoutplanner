@@ -4,7 +4,7 @@ import { useDrop } from 'react-dnd';
 import Modal from './Modal';
 
 
-export default function DroppableZone({ day, onDrop, exercises }) {
+export default function DroppableZone({ day, onDrop, exercises, updateSets, updateReps }) {
 
     const [{ isOver }, drop] = useDrop(() => ({
         accept: 'card',
@@ -22,6 +22,8 @@ export default function DroppableZone({ day, onDrop, exercises }) {
                     exercise={exercise}
                     key={exercise.id}
                     place={"day"}
+                    updateSets={updateSets}
+                    updateReps={updateReps}
                 />
             ))}
 

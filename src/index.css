@@ -37,7 +37,7 @@
 
 .scrollable {
   height:600px;
-  /* Adjust based on your needs */
+  flex-grow: 1;
   overflow-y: auto;
 }
 

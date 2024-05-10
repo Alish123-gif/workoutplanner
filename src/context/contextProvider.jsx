@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useContext, useEffect } from 'react';
+import React, { createContext, useReducer, useContext, useEffect, useState } from 'react';
 
 
 // Initial state
@@ -44,7 +44,9 @@ export const AppProvider = ({ children }) => {
   const setActive = active => dispatch({ type: 'SET_ACTIVE', payload: active });
   const setActiveID = activeID => dispatch({ type: 'SET_ACTIVE_ID', payload: activeID });
   const setScreenSize = screenSize => dispatch({ type: 'SET_SCREEN_SIZE', payload: screenSize });
-
+  const [days, setDays] = useState({
+    Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: []
+});
 
   const toggleSidebar = () => {
     setIsOpen();
@@ -72,6 +74,8 @@ export const AppProvider = ({ children }) => {
     setActiveID,
     setScreenSize,
     toggleSidebar,
+    days,
+    setDays
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
