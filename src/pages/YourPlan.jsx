@@ -214,12 +214,12 @@ export default function YourPlan() {
                                             exercises={exe}
                                             move={true}
                                             updateSets={updateExerciseSets}
-                                            updateReps={updateExerciseReps} />
+                                            updateReps={updateExerciseReps}
+                                            handleAddExercise={handleAddExercise}
+                                        />
                                         {screenSize.width < 1024 &&
                                             <>
-                                                <button onClick={() => handleAddExercise(day)} className="p-1 bg-sky-800/70 text-white rounded h-fit self-start mt-3">
-                                                    Add Exercise
-                                                </button>
+
                                                 <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
                                                     <div className="border-b-4">
                                                         <legend className="p-2 font-semibold text-black">
@@ -240,9 +240,12 @@ export default function YourPlan() {
                                                                 onClick={() => handleDrop(currentDay, exercise.id)} // Use currentDay here
                                                             />
                                                         ))}
+
                                                     </div>
                                                 </Modal>
+
                                             </>}
+
                                     </>
                                 ))}
                             </div>
