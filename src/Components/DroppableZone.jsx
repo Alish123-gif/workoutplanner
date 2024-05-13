@@ -18,7 +18,7 @@ export default function DroppableZone({ day, onDrop, exercises, updateSets, upda
     const toggleOpen = () => setIsOpen(!isOpen);
 
     // Conditional styles for the container
-    const containerStyle = isOpen ? 'min-w-60 min-h-60 flex flex-col items transition-all duration-500' : 'w-14 h-80 items-center border-l-0 transition-all duration-500';
+    const containerStyle = isOpen ? 'min-w-60 min-h-60 flex flex-col items' : 'w-14 h-80 items-center border-l-0';
     const backgroundColor = isOver ? 'bg-blue-200' : 'bg-gray-500/40';
     const dayStyle = isOpen ? 'text-center w-full ' : 'text-white font-semibold text-2xl rotate-90 origin-bottom mt-4 mr-4 ';
 
