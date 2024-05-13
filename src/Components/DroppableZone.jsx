@@ -5,7 +5,7 @@ import useAppContext from '../context/contextProvider';
 
 export default function DroppableZone({ day, onDrop, exercises, updateSets, updateReps, handleAddExercise }) {
     const { screenSize } = useAppContext();
-    const [isOpen, setIsOpen] = useState(true); // State to manage open/folded
+    const [isOpen, setIsOpen] = useState(false); // State to manage open/folded
     const [{ isOver }, drop] = useDrop(() => ({
         accept: 'card',
         drop: (item) => onDrop(day, item.id),
