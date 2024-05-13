@@ -28,8 +28,8 @@ const logo = (props) => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        width={dimensions.width-10}
-        height={dimensions.height-10}
+        width={dimensions.width}
+        height={dimensions.height}
         data-background-color="#bec6f3"
         transform="translate(-1.212 -.196)"
         viewBox="0 0 396 200"
