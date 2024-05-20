@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
         {children}
       </div>
       {show && <SideBar />}
-      {show && <Logo className="absolute top-0 right-5 mt-5" />}
+      // {show && <Logo className="absolute top-0 right-5 mt-5" />}
       {show && <Footer className="w-full" />}
     </div>
   );
