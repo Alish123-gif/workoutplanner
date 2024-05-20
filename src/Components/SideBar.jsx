@@ -58,7 +58,7 @@ export default function SideBar() {
                             key={link}
                             className={`pl-12 py-4 text-5xl liquid-text${active && activeID === link ? " liquid-text-active" : ""} transition-effect text-stroke font-custom`}
                         >
-                            {link} {underDevelopment.includes(link) && <span className='text-xs'> <br/>Under Development</span>}
+                            {link}
                         </Link>
                     ))}
                     <hr className='m-2' />
