@@ -9,7 +9,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost/workoutplanner/login.php', {
+    axios.post('https://alishibliportfolio.000webhostapp.com/login.php', {
       username: username,
       password: password
     })

@@ -61,6 +61,7 @@ export const AppProvider = ({ children }) => {
           id: ex.id,
           name: ex.title,
           muscle: ex.muscle,
+          type: ex.type,
           equipment: ex.equipment,
           difficulty: ex.difficulty,
           desc: ex.desc

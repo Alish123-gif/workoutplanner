@@ -15,7 +15,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT id, title, type, muscle, equipment, decs ,difficulty FROM exercises";
+$sql = "SELECT id, title, type, muscle, equipment ,difficulty FROM exercises";
 $result = $conn->query($sql);
 
 $exercises = array();
