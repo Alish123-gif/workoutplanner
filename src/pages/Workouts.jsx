@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import bg from '../data/workouts.jpg';
-import { exercises } from '../data/dummy';
 import { Link } from 'react-router-dom';
+import useAppContext from '../context/contextProvider';
 
 export default function Workouts(filters) {
   const [filter, setFilter] = useState(`${filters.filters ? filters.filters : ""}`);
   const [sortKey, setSortKey] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
-
+  const {exercises} = useAppContext();
+  console.log(exercises)
   const filteredExercises = exercises
     .filter(exercise =>
       exercise.name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -43,13 +45,14 @@ export default function Workouts(filters) {
         onChange={e => setFilter(e.target.value)}
         className="p-3 py-2 w-full border-2 text-[13px]"
       />
-      <div className="p-2 scrollable">
+      <div className="p-2 scrollable mx-2">
 
         <div className="mt-0 ">
           <table className="w-full text-xs text-left text-gray-500">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <th onClick={() => handleSort('name')}>Name</th>
+                <th onClick={() => handleSort('type')}>Type</th>
                 <th onClick={() => handleSort('muscle')}>Muscle</th>
                 <th onClick={() => handleSort('equipment')}>Equipment</th>
                 <th onClick={() => handleSort('difficulty')}>Level</th>
@@ -58,11 +61,12 @@ export default function Workouts(filters) {
             <tbody>
               {filteredExercises.map(exercise => (
                 <tr key={exercise.id} className="bg-white border-b text-[11px]">
-                  <td className='p-1.5'><Link to={`${exercise.name.toLowerCase().split(" ").join("")}`}>{exercise.name}</Link></td>
+                  <td className='p-1.5'><Link to={`underdevelopment`} state={{exerciseId:exercise.id, exerciseName:exercise.name}}>{exercise.name}</Link></td>
+                  <td className='p-1.5'>{exercise.type}</td>
                   <td className='p-1.5'>{exercise.muscle}</td>
                   <td className='p-1.5'>{exercise.equipment}</td>
                   <td className='p-1.5'>
-                    <p className={`${exercise.difficulty == "beginner"?"bg-green-400/60":exercise.difficulty == "intermediate"?"bg-yellow-400/60":exercise.difficulty == "advanced"?"bg-red-400/60":" "} p-1 rounded-lg w-fit`}>{exercise.difficulty}</p>
+                    <p className={`${exercise.difficulty == "Beginner"?"bg-green-400/60":exercise.difficulty == "Intermediate"?"bg-yellow-400/60":exercise.difficulty == "Expert"?"bg-red-400/60":" "} p-1 rounded-lg w-fit`}>{exercise.difficulty}</p>
                   </td>
                 </tr>
               ))}

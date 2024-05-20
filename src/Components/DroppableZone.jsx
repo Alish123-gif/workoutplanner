@@ -5,12 +5,16 @@ import useAppContext from '../context/contextProvider';
 
 export default function DroppableZone({ day, onDrop, exercises, updateSets, updateReps, handleAddExercise }) {
     const { screenSize } = useAppContext();
-    const [isOpen, setIsOpen] = useState(true); // State to manage open/folded
+    const [isOpen, setIsOpen] = useState(false); // State to manage open/folded
     const [{ isOver }, drop] = useDrop(() => ({
         accept: 'card',
-        drop: (item) => onDrop(day, item.id),
+        drop: (item, monitor) => {
+            if (monitor.canDrop()) {
+                onDrop(day, item.id);
+            }
+        },
         collect: (monitor) => ({
-            isOver: !!monitor.isOver(),
+            isOver: !!monitor.isOver({ shallow: true }),
         }),
     }));
 
@@ -18,13 +22,13 @@ export default function DroppableZone({ day, onDrop, exercises, updateSets, upda
     const toggleOpen = () => setIsOpen(!isOpen);
 
     // Conditional styles for the container
-    const containerStyle = isOpen ? 'min-w-60 min-h-60 flex flex-col items' : 'w-14 h-80 items-center border-l-0';
+    const containerStyle = isOpen ? 'min-w-80 min-h-60 flex flex-col items' : 'max-w-14 h-80 items-center border-l-0 ';
     const backgroundColor = isOver ? 'bg-blue-200' : 'bg-gray-500/40';
-    const dayStyle = isOpen ? 'text-center w-full ' : 'text-white font-semibold text-2xl rotate-90 origin-bottom mt-4 mr-4 ';
+    const dayStyle = isOpen ? 'text-center w-full mt-1' : 'rotate-90 origin-bottom mt-4 mr-4 ';
 
     return (
-        <div ref={drop} onClick={toggleOpen} className={`border-2 m-2 inline-block  ${containerStyle} ${backgroundColor}`} >
-            <div className={`${dayStyle}`} >{day}</div>
+        <div ref={drop} onClick={isOpen?null: toggleOpen} className={`border-2 m-2 flex-grow ${containerStyle} ${backgroundColor}`} >
+            <div className={`text-white font-semibold text-2xl ${dayStyle}`} onClick={isOpen? toggleOpen:null} >{day}</div>
             {isOpen && exercises.map(
                 exercise => (
                     <DraggableCard

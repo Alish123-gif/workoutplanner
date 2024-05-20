@@ -21,7 +21,7 @@ export default function Card({ exerciseName, muscleName, difficulty, place, sets
                 <div className='text-base font-semibold'>
                     {exerciseName}<span className='ml-2 text-gray-500 text-xs'>{muscleName}</span>
                 </div>
-                <p className={`${difficulty === "beginner" ? "bg-green-400/60" : difficulty === "intermediate" ? "bg-yellow-400/60" : difficulty === "advanced" ? "bg-red-400/60" : ""} py-0.5 px-1 rounded-lg w-fit text-xs m-0 mt-1 self-center`}>{difficulty}</p>
+                <p className={`${difficulty === "Beginner" ? "bg-green-400/60" : difficulty === "Intermediate" ? "bg-yellow-400/60" : difficulty === "Expert" ? "bg-red-400/60" : ""} py-0.5 px-1 rounded-lg w-fit text-xs m-0 mt-1 self-center`}>{difficulty}</p>
             </div>
 
             {place === "day" && <div className='flex gap-4 justify-between py-2 text-gray-500'>

@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { exercises } from '../data/dummy';
-import { Card } from '../Components';
-import logo from '../data/logo.svg'
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import React, { useState, useEffect, useRef } from 'react';
+import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import jsPDF from 'jspdf';
 import { DroppableZone, DraggableCard } from '../Components';
 import useAppContext from '../context/contextProvider';
-import jsPDF from 'jspdf';
-
 import Modal from '../Components/Modal';
 
-
 export default function YourPlan() {
-    const { screenSize } = useAppContext()
+    const { screenSize, exercises, setExercises } = useAppContext();
     const [days, setDays] = useState({
         Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: []
-    })
+    });
+    const exercisesRef = useRef(exercises);
     const [filter, setFilter] = useState("");
     const [isModalOpen, setModalOpen] = useState(false);
     const [currentDay, setCurrentDay] = useState();
+
+    
+
+    useEffect(() => {
+        exercisesRef.current = exercises;
+    }, [exercises]);
 
     const handleAddExercise = (day) => {
         setCurrentDay(day); // Set the current day
@@ -48,7 +50,7 @@ export default function YourPlan() {
     };
 
     const handleDrop = (day, exerciseId) => {
-        const exercise = exercises.find(ex => ex.id === exerciseId);
+        const exercise = exercisesRef.current.find(ex => ex.id === exerciseId);
         if (!exercise) {
             console.error('Exercise not found');
             return;
@@ -85,38 +87,31 @@ export default function YourPlan() {
         doc.setFillColor(12, 74, 110); // Blue color
         doc.setDrawColor(255); // White border color
         doc.roundedRect(2, 2, 206, 36, 5, 5, 'F'); // Rounded blue background rectangle with barely visible margin
-        // console.log(doc.getFontList())
-
 
         doc.setFontSize(18);
         doc.setTextColor(255); // White color
-        doc.text('Your Exercise Plan', 10, 17); // 
-        let y = 45; // Initial y position for conten
+        doc.text('Your Exercise Plan', 10, 17);
+        let y = 45; // Initial y position for content
         let pageHeight = doc.internal.pageSize.height;
 
         Object.entries(days).forEach(([day, exercises]) => {
             if (exercises.length > 0) {
-                // Check if there is enough space on the current page for the content
                 if (y + 40 + exercises.length * 10 > pageHeight) {
-                    doc.addPage(); // Add a new page if the content exceeds the current page height
-                    y = 20; // Reset y position for the new page
+                    doc.addPage();
+                    y = 20;
                 }
-                // Day header for the table
                 doc.setFillColor(200, 200, 200); // Gray background color
-                doc.rect(10, y, 190, 10, 'F'); // Gray background rectangle for day header
+                doc.rect(10, y, 190, 10, 'F');
 
                 doc.setFontSize(14);
                 doc.setTextColor(0); // Black color
-                // doc.setFont('bold');
-                doc.text(day, 15, y + 7); // Day header text
+                doc.text(day, 15, y + 7);
 
-                // Table headers
                 doc.setFillColor(240, 240, 240); // Light gray background color for table headers
-                doc.rect(10, y + 12, 190, 10, 'F'); // Gray background rectangle for table headers
+                doc.rect(10, y + 12, 190, 10, 'F');
 
                 doc.setFontSize(12);
                 doc.setTextColor(50); // Dark gray color for text
-                // doc.setFont('normal');
                 doc.text('Exercise Name', 15, y + 20);
                 doc.text('Muscle Type', 75, y + 20);
                 doc.text('Reps', 115, y + 20);
@@ -124,37 +119,32 @@ export default function YourPlan() {
 
                 exercises.forEach((exercise, index) => {
                     if (y + 30 + index * 10 > pageHeight) {
-                        doc.addPage(); // Add a new page if the content exceeds the current page height
-                        y = 20; // Reset y position for the new page
+                        doc.addPage();
+                        y = 20;
                     }
 
-                    const rowColor = index % 2 === 0 ? [255, 255, 255] : [245, 245, 245]; // Alternate row colors
+                    const rowColor = index % 2 === 0 ? [255, 255, 255] : [245, 245, 245];
 
-                    doc.setFillColor(rowColor[0], rowColor[1], rowColor[2]); // Row background color
-                    doc.rect(10, y + 22 + index * 10, 190, 10, 'F'); // Gray background rectangle for row
+                    doc.setFillColor(rowColor[0], rowColor[1], rowColor[2]);
+                    doc.rect(10, y + 22 + index * 10, 190, 10, 'F');
 
-                    doc.setTextColor(0); // Black color for text
+                    doc.setTextColor(0);
                     doc.text(exercise.name, 15, y + 30 + index * 10);
                     doc.text(exercise.muscle, 75, y + 30 + index * 10);
                     doc.text(exercise.reps.toString(), 115, y + 30 + index * 10);
                     doc.text(exercise.sets.toString(), 155, y + 30 + index * 10);
                 });
 
-                y += 30 + exercises.length * 10; // Adjust y position for the next day
+                y += 30 + exercises.length * 10;
             }
         });
 
         doc.save('exercise_plan.pdf');
     };
 
-
-
-
-
     const handleEndDrag = (exerciseId) => {
         setDays(prevDays => {
             const newDays = { ...prevDays };
-            // Remove the exercise from all days
             Object.keys(newDays).forEach(day => {
                 newDays[day] = newDays[day].filter(exercise => exercise.id !== exerciseId);
             });
@@ -180,8 +170,8 @@ export default function YourPlan() {
                     </button>
                 </div>
                 <DndProvider backend={HTML5Backend}>
-                    <div className="flex flex-row ">
-                        {screenSize.width > 1024 &&
+                    <div className="flex flex-row">
+                        {screenSize.width > 1024 && (
                             <div className="flex flex-col border-4 w-3/12">
                                 <div className="border-b-4">
                                     <legend className="p-2 font-semibold text-black">
@@ -199,16 +189,16 @@ export default function YourPlan() {
                                         <DraggableCard key={exercise.id} exercise={exercise} move={false} onEndDrag={handleEndDrag} />
                                     ))}
                                 </div>
-                            </div>}
+                            </div>
+                        )}
                         <div className={`flex flex-col border-4 ${screenSize.width > 1024 ? 'mx-3' : ""} w-full`}>
                             <legend className="ml-5 font-semibold text-center text-black">
                                 Your Plan
                             </legend>
                             <div className="flex flex-wrap lg:flex-row w-full justify-center overflow-y-auto">
                                 {Object.entries(days).map(([day, exe]) => (
-                                    <>
+                                    <React.Fragment key={day}>
                                         <DroppableZone
-                                            key={day}
                                             day={day}
                                             onDrop={handleDrop}
                                             exercises={exe}
@@ -217,36 +207,31 @@ export default function YourPlan() {
                                             updateReps={updateExerciseReps}
                                             handleAddExercise={handleAddExercise}
                                         />
-                                        {screenSize.width < 1024 &&
-                                            <>
-
-                                                <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
-                                                    <div className="border-b-4">
-                                                        <legend className="p-2 font-semibold text-black">
-                                                            Recommended
-                                                        </legend>
-                                                        <input
-                                                            type="text"
-                                                            placeholder="Filter exercises..."
-                                                            onChange={(e) => setFilter(e.target.value)}
-                                                            className="p-2 w-[98%] rounded-sm mb-1"
+                                        {screenSize.width < 1024 && (
+                                            <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+                                                <div className="border-b-4">
+                                                    <legend className="p-2 font-semibold text-black">
+                                                        Recommended
+                                                    </legend>
+                                                    <input
+                                                        type="text"
+                                                        placeholder="Filter exercises..."
+                                                        onChange={(e) => setFilter(e.target.value)}
+                                                        className="p-2 w-[98%] rounded-sm mb-1"
+                                                    />
+                                                </div>
+                                                <div className="overflow-y-auto h-full">
+                                                    {filteredExercises.map((exercise) => (
+                                                        <DraggableCard
+                                                            key={exercise.id}
+                                                            exercise={exercise}
+                                                            onClick={() => handleDrop(currentDay, exercise.id)}
                                                         />
-                                                    </div>
-                                                    <div className="overflow-y-auto h-full">
-                                                        {filteredExercises.map((exercise) => (
-                                                            <DraggableCard
-                                                                key={exercise.id}
-                                                                exercise={exercise}
-                                                                onClick={() => handleDrop(currentDay, exercise.id)} // Use currentDay here
-                                                            />
-                                                        ))}
-
-                                                    </div>
-                                                </Modal>
-
-                                            </>}
-
-                                    </>
+                                                    ))}
+                                                </div>
+                                            </Modal>
+                                        )}
+                                    </React.Fragment>
                                 ))}
                             </div>
                         </div>

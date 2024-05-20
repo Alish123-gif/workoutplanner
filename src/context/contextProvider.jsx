@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 // Initial state
@@ -44,13 +45,32 @@ export const AppProvider = ({ children }) => {
   const setActive = active => dispatch({ type: 'SET_ACTIVE', payload: active });
   const setActiveID = activeID => dispatch({ type: 'SET_ACTIVE_ID', payload: activeID });
   const setScreenSize = screenSize => dispatch({ type: 'SET_SCREEN_SIZE', payload: screenSize });
+  const [exercises, setExercises] = useState([]);
   const [days, setDays] = useState({
     Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: []
-});
+  });
 
   const toggleSidebar = () => {
     setIsOpen();
   };
+
+  useEffect(() => {
+    axios.get('https://alishibliportfolio.000webhostapp.com/fetch_exercises.php')
+      .then(response => {
+        const fetchedExercises = response.data.map(ex => ({
+          id: ex.id,
+          name: ex.title,
+          muscle: ex.muscle,
+          equipment: ex.equipment,
+          difficulty: ex.difficulty,
+          desc: ex.desc
+        })).slice(0, 500);
+        setExercises(fetchedExercises);  // Update state
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
+  }, []);
   useEffect(() => {
     const handleResize = () => {
       setScreenSize({
@@ -75,7 +95,8 @@ export const AppProvider = ({ children }) => {
     setScreenSize,
     toggleSidebar,
     days,
-    setDays
+    setDays,
+    exercises,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

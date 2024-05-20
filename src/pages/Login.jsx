@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const Navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
+    axios.post('http://localhost/workoutplanner/login.php', {
+      username: username,
+      password: password
+    })
+    .then(response => {
+      if (response.data.status === "success") {
+        // Handle successful login here, e.g., store logged-in state, redirect, etc.
+        localStorage.setItem('isLoggedIn', 'true');
+        Navigate('/home');
+      } else {
+        alert(response.data.message); // Show error message
+      }
+    })
+    .catch(error => {
+      console.error('Login error:', error);
+    });
   };
 
   return (
@@ -42,13 +57,12 @@ const Login = () => {
             />
           </div>
           <span className='flex w-full justify-center'><Link to={"/signup"} className='text-center mb-3 hover:text-sky-500 w-fit'>Sign Up</Link></span>
-          <Link to={"/home"}><button
+          <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg w-full"
           >
             Login
           </button>
-          </Link>
         </form>
       </div>
     </div>

@@ -1,22 +1,19 @@
 // src/routes.js
 import { Home, Login, SignUp, YourPlan, Workouts, Exercise } from './pages';
-import { exercises } from './data/dummy';
+
 
 const workoutFilters = [
-  'chest', 'core', 'arms', 'forearms', 'legs', 'calves', 'shoulders', 'traps', 'back'
+  'chest', 'biceps','abductors', 'abdominals', 'forearms', 'hamstrings', 'calves', 'shoulders', 'traps', 'lowerback','middleback','lats','glutes','abductors','quadriceps','triceps'
 ];
 
 export const mainRoutes = [
   { path: "/", element: <Home /> },
-  { path: "/gym", element: <Home /> },
   { path: "/index.html", element: <Home /> },
   { path: "/home", element: <Home /> },
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
   { path: "/yourplan", element: <YourPlan /> },
-  { path: "/contactus", element: <Home /> },
-  { path: "/workouts", element: <Workouts /> },
-  { path: "/underdevelopment", element: <Exercise exercise={exercises[0]} /> }
+  { path: "/workouts", element: <Workouts /> }
 ];
 
 export const workoutRoutes = workoutFilters.flatMap(filter => [

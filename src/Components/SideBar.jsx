@@ -7,7 +7,6 @@ import { isMobile } from 'react-device-detect';
 
 
 export default function SideBar() {
-    const underDevelopment = ["Contact Us", "Gym", "Under Development"]
     const { isOpen, setIsOpen, content, setContent, active, setActive, activeID, setActiveID,screenSize } = useAppContext();
     const Navigate = useNavigate();
 
@@ -52,14 +51,14 @@ export default function SideBar() {
                 className={`fixed inset-y-0 left-0 ${screenSize.width<720?"w-full": "w-5/12" } custom-background`}
             >
                 <div className="flex flex-col mt-5 scrollable">
-                    {['Home', 'Your Plan', 'Contact Us', 'Gym', "Workouts", "Under Development"].map((link, index) => (
+                    {['Home', 'Your Plan', "Workouts", "Under Development"].map((link, index) => (
                         <Link
                             onClick={() => handleLinkClick(link)}
                             to="#"
                             key={link}
                             className={`pl-12 py-4 text-5xl liquid-text${active && activeID === link ? " liquid-text-active" : ""} transition-effect text-stroke font-custom`}
                         >
-                            {link} {underDevelopment.includes(link) && <span className='text-xs'>Under Development</span>}
+                            {link}
                         </Link>
                     ))}
                     <hr className='m-2' />

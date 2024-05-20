@@ -24,7 +24,7 @@ const MuscleBodySvg = () => {
             d="M56.076 92.059c1.73-.54 3.716-.761 5.434-.183.502.17.934.567 1.233 1.005.45.66.456 1.644.867 2.329.438.729 1.004 1.221 1.644 1.78.5.438 1.501.5 1.598 1.188.097.689-.804 1.226-1.324 1.735-.7.686-1.496 1.301-2.374 1.736a12.6 12.6 0 0 1-4.019 1.187c-.756.094-1.575.189-2.283-.092-.562-.222-.93-.413-1.37-1.187-.43-.755-.529-1.693-.616-2.557-.179-1.757-.264-3.563.068-5.297.083-.436.219-.892.502-1.233.162-.195.398-.335.64-.411M52.505 92.054c-1.73-.501-3.717-.678-5.434-.06-.503.18-.934.587-1.233 1.032-.45.67-.57 1.654-.982 2.349-.438.738-1.004 1.198-1.644 1.772-.5.448-1.387.578-1.484 1.269-.097.69.805 1.208 1.324 1.705.7.67 1.496 1.267 2.375 1.682 1.252.59 2.632.956 4.018 1.097.756.076 1.575.153 2.284-.143.561-.235.93-.434 1.37-1.218.429-.765.528-1.705.616-2.571.179-1.761.263-3.57-.069-5.296-.083-.434-.218-.887-.502-1.222a1.33 1.33 0 0 0-.64-.396"
             transform="translate(-16.712 -86.016)"
           /></g></Link>
-        <Link to="workouts/upperabs"><g
+        <Link to="workouts/abdominals"><g
           className="cursor-pointer opacity-35 fill-current text-white hover:text-red-600"
 
         >
@@ -117,7 +117,7 @@ const MuscleBodySvg = () => {
             transform="translate(-16.712 -86.016)"
           />
         </g></Link>
-        <Link to="workouts/lowerabs"><g
+        <Link to="workouts/abdominals"><g
           className="cursor-pointer opacity-35 fill-current text-white hover:text-red-600"
         >
           <path
@@ -141,7 +141,7 @@ const MuscleBodySvg = () => {
             transform="translate(-16.712 -86.016)"
           />
         </g></Link>
-        <Link to="workouts/quads"><g
+        <Link to="workouts/quadriceps"><g
           className="cursor-pointer opacity-35 fill-current text-white hover:text-red-600"
         >
           <path

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -7,9 +8,22 @@ const SignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your SignUp logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
+    console.log(username +" "+ password)
+    axios.post('https://alishibliportfolio.000webhostapp.com/signup.php', {
+      username: username,
+      password: password
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    
   };
 
   return (
@@ -42,13 +56,13 @@ const SignUp = () => {
             />
           </div>
           <span className='flex w-full justify-center'><Link to={"/login"} className='text-center mb-3 hover:text-sky-500 w-fit'>Sign Up</Link></span>
-          <Link to={"/home"}><button
+          <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg w-full"
           >
             Sign Up
           </button>
-          </Link>
+          
         </form>
       </div>
     </div>
