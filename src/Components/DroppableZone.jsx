@@ -27,8 +27,8 @@ export default function DroppableZone({ day, onDrop, exercises, updateSets, upda
     const dayStyle = isOpen ? 'text-center w-full mt-1' : 'rotate-90 origin-bottom mt-4 mr-4 ';
 
     return (
-        <div ref={drop} onClick={toggleOpen} className={`border-2 m-2 inline-block  ${containerStyle} ${backgroundColor}`} >
-            <div className={`${dayStyle}`} >{day}</div>
+        <div ref={drop} onClick={isOpen?null:toggleOpen} className={`border-2 m-2 inline-block  ${containerStyle} ${backgroundColor}`} >
+            <div onClick={isOpen?toggleOpen:null} className={` text-white text-2xl stroke-8 ${dayStyle}`} >{day}</div>
             {isOpen && exercises.map(
                 exercise => (
                     <DraggableCard
