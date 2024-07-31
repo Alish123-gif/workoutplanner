@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
-const Exercise = ({ exercise }) => {
+const Exercise = () => {
     const [videoUrl, setVideoUrl] = useState('');
-
+    const { exercise } = useLocation().state;
+    
     useEffect(() => {
         const fetchVideo = async () => {
             try {
                 const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
                     params: {
                         part: 'snippet',
-                        q: "how to do "+exercise.name,
+                        q: "how to do " + exercise.title,
                         maxResults: 1,
                         order: 'viewCount', // This orders the results by view count, getting the most popular video
                         type: 'video',
@@ -28,7 +30,7 @@ const Exercise = ({ exercise }) => {
         };
 
         fetchVideo();
-    }, [exercise.name]);
+    }, [exercise.title]);
     return (
         <div className='flex justify-center bg-gradient-to-r from-gray-800 via-sky-800 to-gray-800 m-0.5 rounded-lg'>
             <div className="flex flex-col mt-10 max-w-md rounded-lg overflow-hidden shadow-lg m-4 p-4 bg-white w-full md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
@@ -46,9 +48,9 @@ const Exercise = ({ exercise }) => {
                     )}
                 </div>
                 <div className="px-6 py-4 bg-sky-800/90 mt-4 rounded-md text-white w-fit self-center">
-                    <div className="font-bold text-2xl mb-2">{exercise.name}</div>
+                    <div className="font-bold text-2xl mb-2">{exercise.title}</div>
                     <p className="text-sm mt-2">
-                        Muscle: {exercise.muscle}
+                        Muscle: {exercise.type}
                     </p>
                     <p className='text-sm mt-2'>
                         Difficulty: <span className={`${exercise.difficulty === "beginner" ? "text-green-400" : exercise.difficulty === "intermediate" ? "text-yellow-400" : exercise.difficulty === "expert" ? "text-red-400" : ""}`}>{exercise.difficulty}</span>

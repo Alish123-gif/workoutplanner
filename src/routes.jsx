@@ -1,9 +1,8 @@
-// src/routes.js
 import { Home, Login, SignUp, YourPlan, Workouts, Exercise } from './pages';
 
 
 const workoutFilters = [
-  'chest', 'biceps','abductors', 'abdominals', 'forearms', 'hamstrings', 'calves', 'shoulders', 'traps', 'lowerback','middleback','lats','glutes','abductors','quadriceps','triceps'
+  'chest', 'biceps', 'abductors', 'abdominals', 'forearms', 'hamstrings', 'calves', 'shoulders', 'traps', 'lowerback', 'middleback', 'lats', 'glutes', 'abductors', 'quadriceps', 'triceps'
 ];
 
 export const mainRoutes = [
@@ -13,7 +12,8 @@ export const mainRoutes = [
   { path: "/login", element: <Login /> },
   { path: "/signup", element: <SignUp /> },
   { path: "/yourplan", element: <YourPlan /> },
-  { path: "/workouts", element: <Workouts /> }
+  { path: "/workouts/underdevelopment", element: <Exercise /> },
+  { path: "/workouts", element: <Workouts /> },
 ];
 
 export const workoutRoutes = workoutFilters.flatMap(filter => [

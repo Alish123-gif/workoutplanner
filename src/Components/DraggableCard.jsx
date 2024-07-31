@@ -20,10 +20,10 @@ export default function DraggableCard({ exercise, place, onEndDrag, onClick, upd
     return (
         <div ref={drag} style={{ opacity: isDragging ? 0.5 : 1 }} onClick={onClick}>
             <Card
-                exerciseName={exercise.name}
-                muscleName={exercise.muscle}
+                exerciseName={exercise.title}
+                muscleName={exercise.type}
                 difficultyColor={exercise.difficultyColor}
-                difficulty={exercise.difficulty}
+                difficulty={exercise.level}
                 sets={exercise.sets}
                 reps={exercise.reps}
                 place={place}

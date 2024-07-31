@@ -1,5 +1,4 @@
 import React, { createContext, useReducer, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
 
 
 // Initial state
@@ -55,24 +54,6 @@ export const AppProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    axios.get('https://alishibliportfolio.000webhostapp.com/fetch_exercises.php')
-      .then(response => {
-        const fetchedExercises = response.data.map(ex => ({
-          id: ex.id,
-          name: ex.title,
-          muscle: ex.muscle,
-          type: ex.type,
-          equipment: ex.equipment,
-          difficulty: ex.difficulty,
-          desc: ex.desc
-        })).slice(0, 500);
-        setExercises(fetchedExercises);  // Update state
-      })
-      .catch(error => {
-        console.error('Error fetching data: ', error);
-      });
-  }, []);
-  useEffect(() => {
     const handleResize = () => {
       setScreenSize({
         width: window.innerWidth,
@@ -86,6 +67,7 @@ export const AppProvider = ({ children }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, [setScreenSize]);
+  
   // Value provided to context consumers
   const value = {
     ...state,

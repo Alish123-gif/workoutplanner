@@ -33,7 +33,7 @@ export default function DroppableZone({ day, onDrop, exercises, updateSets, upda
                 exercise => (
                     <DraggableCard
                         exercise={exercise}
-                        key={exercise.id}
+                        key={exercise.ID}
                         place={"day"}
                         updateSets={updateSets}
                         updateReps={updateReps}

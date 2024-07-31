@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.19",
+    "@tanstack/query-sync-storage-persister": "^5.51.15",
+    "@tanstack/react-query-persist-client": "^5.51.15",
     "axios": "^1.6.8",
     "firebase": "^10.11.1",
     "jspdf": "^2.5.1",
@@ -20,6 +22,8 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-icons": "^5.1.0",
+    "react-intersection-observer": "^9.13.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.22.3",
     "styled-components": "^6.1.9"
   },
